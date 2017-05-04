@@ -402,27 +402,3 @@ for (i in 1:5) {
 
 
 
-# now I want a new data with 25 rare and 25 common
-newData<- strata(data, stratanames =  "Species", size = c(25,25))
-table(newData$Species)
-
-# common   rare 
-#   25     25 
-# Dataframe size = 50
-
-# YOU CAN ALSO CREATE STRATIFIED SAMPLE BASED ON TWO CLASS VARIABLES
- data=rbind(matrix(rep("nc",165),165,1,byrow=TRUE),matrix(rep("sc",70),70,1,byrow=TRUE))
- data=cbind.data.frame(data,c(rep(1,100), rep(2,50), rep(3,15), rep(1,30),rep(2,40)),
-                        +                       1000*runif(235))
- names(data)=c("state","region","income")
- s=strata(data,c("state", "region"),size=c(10,5,10,4,6), method="srswor")
-# in this you provide size for each combination of the two variables
-
-
-# 3 for sampling a test dats set maintaining the popultion distribution, use createDatapattern
- x<- createDataPartition(data$state, p= .8, list = F)
- x<- as.vector(x)
- newData<- data[x,]
-# this will take 80% of the population to create a sample
-
-
